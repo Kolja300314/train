@@ -1,0 +1,148 @@
+# -*- coding: utf-8 -*-
+<NormButton@Button>:
+    font_size: 20
+    size_hint_x:None
+    size_hint:(1, 0.1)
+    color:(0, 0, 0, 1)
+    background_normal: ''
+
+<SaveLabel@Label>:
+    size_hint: (1, None)
+    height: 30
+    color: (1, 0, 0, 1)
+
+<NormBox@BoxLayout>:
+    spacing:10
+    padding:10
+    orientation:'vertical'
+
+<MenuScreen>:
+    NormBox:
+        NormButton:
+            text:'Додати треніровку'
+            on_release: root.manager.current = 'add'
+        NormButton:
+            text:'Мої треніровкі'
+            on_press:root.manager.current = 'show'
+        Widget:
+
+<AddScreen>:
+    txt_inpt: txt_inpt
+    NormBox:
+        TextInput:
+            id: txt_inpt
+            size_hint:(1, .1)
+            font_size: 30
+        NormButton:
+            text: 'Додати'
+            on_press: root.check_status(txt_inpt)
+        NormButton:
+            text: 'В меню'
+            on_press: root.manager.current = 'menu'
+        Widget:
+
+<SaveScreen>:
+    grid2: grid2
+    GridLayout:
+        cols: 1
+        GridLayout:
+            id: grid2
+            cols: 2
+            SaveLabel:
+                text: 'Вправа'
+            SaveLabel:
+                text: 'Кількість'
+        Widget:
+            size_hint:(1, 0.1)
+
+        Button:
+            text: '+'
+            size_hint: (1, .1)
+            on_press: root.add_line()
+        Button:
+            size_hint: (1, .1)
+            text: 'Зберегти'
+            on_release: root.save_exercises()
+        Button:
+            size_hint: (1, .1)
+            text: 'В меню'
+            on_press: root.manager.current = 'menu'
+
+<ShowScreen>:
+    grd: grd
+    GridLayout:
+        padding: 10
+        spacing: 10
+        cols: 1
+        id: grd
+        SaveLabel:
+            text: 'Тренировки'
+    GridLayout:
+        size_hint: (1, None)
+        rows: 2
+        padding: 10
+        spacing: 10
+        Widget:
+        NormButton:
+            size_hint: (1, None)
+            height: 40
+            text: 'В меню'
+            on_press: root.manager.current = 'menu'
+
+<TrainScreen>:
+    grd: grd
+    GridLayout:
+        id: grd
+        cols: 3
+        SaveLabel:
+            text: 'Вправа'
+        SaveLabel:
+            text: 'Зроблено'
+        SaveLabel:
+            text: 'Ціль'
+    GridLayout:
+        size_hint: (1, None)
+        padding: 10
+        spacing: 10
+        rows: 3
+        Button:
+            text: 'Обновити'
+            size_hint: (1, .2)
+            on_press: root.change()
+        Button:
+            text: 'Обнулити'
+            size_hint: (1, .2)
+            on_press: root.reset()
+        Button:
+            text: 'Видалити'
+            size_hint: (1, .2)
+            on_press: root.delete()
+        Button:
+            size_hint: (1, .2)
+            text: 'Назад'
+            on_press: root.manager.current = 'show'
+
+<ChangeScreen>:
+    grd: grd
+    GridLayout:
+        id: grd
+        cols: 3
+        SaveLabel:
+            text: 'Вправа'
+        SaveLabel:
+            text: 'Зроблено'
+        SaveLabel:
+            text: '+ зробив'
+    GridLayout:
+        size_hint: (1, None)
+        padding: 10
+        spacing: 10
+        rows: 2
+        Button:
+            text: 'Обновити'
+            size_hint: (1, .2)
+            on_press: root.save()
+        Button:
+            size_hint: (1, .2)
+            text: 'В меню'
+            on_press: root.manager.current = 'menu'
